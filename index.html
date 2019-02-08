@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ideabox</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel = 'stylesheet' href = 'styles.css'> 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet"> 
+</head>
+<body>
+  <header>
+    <h1 class="page-title-purple">ideabox: iteration 1,293</h1>
+    <form class="search-form">
+      <input type="text" placeholder=" Search" id="search-input">
+      <button type="submit" class="search-button"></button>
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </header>
+    <form class="idea-form">
+      <label for="title-input">Title</label>
+        <input type="text" id="title-input" class="inputs">
+      <label for="body-input">Body</label>
+        <textarea type="text" id="body-input" class="inputs"></textarea>
+      <button type="submit" class="save-button buttons">Save</button>
+      <div class="filter-buttons-section">
+        <button class="filter-button buttons swill-button">Swill</button>
+        <button class="filter-button buttons plausible-button">Plausible</button>
+        <button class="filter-button buttons genius-button">Genius</button>
+        <button class="filter-button buttons reset-button">Reset</button>
+      </div>
+    </form>
+    <article class="overflow" id="card-container"></article>
+<script type="text/javascript" src="idea.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
