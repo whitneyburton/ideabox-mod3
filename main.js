@@ -9,10 +9,11 @@ bodyInput.addEventListener('keyup', enableSaveButton)
 document.querySelector('.idea-form').addEventListener('submit', createIdea)
 document.getElementById('card-container').addEventListener('click', handleClick)
 document.getElementById('card-container').addEventListener('keyup', handleChange)
-// document.getElementById('search-input').addEventListener('keyup', searchFilter)
-// document.querySelector('.genius-button').addEventListener('click', geniusFilter)
-// document.querySelector('.swill-button').addEventListener('click', swillFilter)
-// document.querySelector('.plausible-button').addEventListener('click', plausibleFilter)
+document.getElementById('search-input').addEventListener('keyup', searchFilter)
+
+document.querySelector('.genius-button').addEventListener('click', geniusFilter)
+document.querySelector('.swill-button').addEventListener('click', swillFilter)
+document.querySelector('.plausible-button').addEventListener('click', plausibleFilter)
 
 loadIdeas()
 
@@ -69,7 +70,6 @@ function populateIdeaCard(idea) {
   cardContainer.prepend(card)
 }
 
-
 function deleteIdea(e) {
   var id = parseInt(e.target.closest('.idea-card').dataset.id)
   const filteredIdeas = ideas.filter(idea => {
@@ -111,17 +111,17 @@ function handleClick(e) {
     deleteIdea(e)
       break
     case 'upvote-button':
-    increaseQuality(e)
+    incrementQuality(e)
       break
     case 'downvote-button':
-    decreaseQuality(e)
+    decrementQuality(e)
       break 
     default:
       break
   }
 }
 
-function increaseQuality(e) {
+function incrementQuality(e) {
   if (e.target.closest('.idea-card') !== null) {
     var id = parseInt(e.target.closest('.idea-card').dataset.id)
     ideas.forEach(idea => {
@@ -133,7 +133,7 @@ function increaseQuality(e) {
   }
 }
 
-function decreaseQuality(e) {
+function decrementQuality(e) {
   if (e.target.closest('.idea-card') !== null) {
     var id = parseInt(e.target.closest('.idea-card').dataset.id)
     ideas.forEach(idea => {
@@ -145,50 +145,41 @@ function decreaseQuality(e) {
   }
 }
 
-// function geniusFilter(e) {
-//   e.preventDefault()
-//   const qualityCategory = document.querySelectorAll('.quality-category')
-//   const geniusButtonText = document.querySelector('.genius-button')
-//   qualityCategory.forEach(function (qualityValue) {
-//     if (qualityValue.innerText !== geniusButtonText.innerText) {
-//       qualityValue.closest('.idea-card').classList.add('display-mode-none')
-//     }
-//   })
-// }
+function swillFilter(e) {
+  e.preventDefault()
+  document.getElementById('card-container').innerHTML = null;
+  ideas.map(idea => {
+    if (idea.quality === 0) {
+      populateIdeaCard(idea)
+    }
+  })
+}
 
-// function plausibleFilter(e) {
-//   e.preventDefault()
-//   const qualityCategory = document.querySelectorAll('.quality-category')
-//   const plausibleButtonText = document.querySelector('.plausible-button')
-//   qualityCategory.forEach(function (qualityValue) {
-//     if (qualityValue.innerText !== plausibleButtonText.innerText) {
-//       qualityValue.closest('.idea-card').classList.add('display-mode-none')
-//     }
-//   })
-// }
+function plausibleFilter(e) {
+  e.preventDefault()
+  document.getElementById('card-container').innerHTML = null;
+  ideas.map(idea => {
+    if (idea.quality === 1) {
+      populateIdeaCard(idea)
+    }
+  })
+}
 
-// function searchFilter() {
-//   Object.keys(localStorage).forEach(function (cardObj) {
-//     const matchingCardsObject = document.getElementById(`${JSON.parse(localStorage[cardObj]).id}`)
-//     const matchingCards = matchingCardsObject.parentNode.parentNode
-//     const localStorageTitle = JSON.parse(localStorage[cardObj]).title
-//     const localStorageBody = JSON.parse(localStorage[cardObj]).body
-//     const searchInput = document.getElementById('search-input').value.toLowerCase()
-//     if (!localStorageTitle.toLowerCase().includes(searchInput) && !localStorageBody.toLowerCase().includes(searchInput)) {
-//       matchingCards.classList.add('display-mode-none')
-//     } else if (localStorageTitle.toLowerCase().includes(searchInput) && localStorageBody.toLowerCase().includes(searchInput)) {
-//       matchingCards.classList.remove('display-mode-none')
-//     }
-//   })
-// }
+function geniusFilter(e) {
+  e.preventDefault()
+  document.getElementById('card-container').innerHTML = null;
+  ideas.map(idea => {
+    if (idea.quality === 2) {
+      populateIdeaCard(idea)
+    }
+  })
+}
 
-// function swillFilter(e) {
-//   e.preventDefault()
-//   const qualityCategory = document.querySelectorAll('.quality-category')
-//   const swillButtonText = document.querySelector('.swill-button')
-//   qualityCategory.forEach(function (qualityValue) {
-//     if (qualityValue.innerText !== swillButtonText.innerText) {
-//       qualityValue.closest('.idea-card').classList.add('display-mode-none')
-//     }
-//   })
-// }
+function searchFilter() {
+  document.getElementById('card-container').innerHTML = null;
+  const searchInput = document.getElementById('search-input').value.toLowerCase()
+  const filteredIdeas = ideas.filter(idea => {
+    return (idea.title.toLowerCase().includes(searchInput) || idea.body.toLowerCase().includes(searchInput))
+  })
+  filteredIdeas.forEach(idea => populateIdeaCard(idea))
+}
