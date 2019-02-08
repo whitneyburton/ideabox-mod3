@@ -6,13 +6,15 @@ class Idea {
     this.quality = quality || 0;
   };
 
-  setToStorage() {
-    localStorage.setItem(this.id, JSON.stringify(this));
+  setToStorage(idea) {
+    localStorage.setItem('ideas', JSON.stringify(idea))
   };
 
-  deleteFromStorage() {
-    localStorage.removeItem(this.id);
-  } 
+  deleteFromStorage(ideas, idea) {
+    console.log('fires')
+    const filteredIdeas = ideas.filter(idea => idea.id !== this.id)
+    localStorage.setItem('ideas', JSON.stringify(filteredIdeas))
+  }
 
   updateQuality(direction) {
     var qualityArray = ['Swill', 'Plausible', 'Genius'];
@@ -21,16 +23,17 @@ class Idea {
     } else if (direction === 'down' && this.quality > 0) {
       this.quality--;
     }
-    this.setToStorage();
     return qualityArray[this.quality];
   }
+
   updateSelf(text, type) {
+    console.log('updateSelf fires')
     if (type === 'title') {
       this.title = text;
-    } 
+    }
     if (type === 'body') {
       this.body = text;
     }
-    this.setToStorage();
+    this.setToStorage(ideas);
   }
 };
