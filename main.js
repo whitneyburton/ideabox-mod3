@@ -5,15 +5,15 @@ let ideas = []
 
 document.querySelector('.save-button').disabled = true
 bodyInput.addEventListener('keyup', enableSaveButton)
-
 document.querySelector('.idea-form').addEventListener('submit', createIdea)
 document.getElementById('card-container').addEventListener('click', handleClick)
 document.getElementById('card-container').addEventListener('keyup', handleChange)
 document.getElementById('search-input').addEventListener('keyup', searchFilter)
-
 document.querySelector('.genius-button').addEventListener('click', geniusFilter)
 document.querySelector('.swill-button').addEventListener('click', swillFilter)
 document.querySelector('.plausible-button').addEventListener('click', plausibleFilter)
+
+// document.querySelector('.filter-button').addEventListener('click', filterCards)
 
 loadIdeas()
 
@@ -183,3 +183,25 @@ function searchFilter() {
   })
   filteredIdeas.forEach(idea => populateIdeaCard(idea))
 }
+
+
+// function filterCards(e) {
+//   e.preventDefault()
+//   document.getElementById('card-container').innerHTML = null;
+//   const filterType = e.target.innerText
+//   let qualityIndex
+//   if (filterType === 'Swill') {
+//     qualityIndex = 0
+//   } else if (filterType === 'Plausible') {
+//     qualityIndex = 1
+//   } else {
+//     qualityIndex = 2
+//   }
+//   console.log(qualityIndex)
+//   ideas.map(idea => {
+//     if (idea.quality === qualityIndex) {
+//       populateIdeaCard(idea)
+//     }
+//   })
+// }
+

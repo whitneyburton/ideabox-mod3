@@ -2,3 +2,8 @@ body {
   font-family: Roboto, sans-serif;
   background-color: lavender;
 }
+
+.card-content {
+  border: 1px solid black;
+  width: 50%;
+}
